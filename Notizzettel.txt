@@ -64,6 +64,8 @@ STL-Algorithmen:
    Transformieren
 
 
+
+
 =============================
 
 ToDo - Liste:
@@ -75,6 +77,10 @@ auto  (Verlust von const und Referenz, std::uint8_t)
 auto: Bei Lambdas geht es nicht anders :)
 
 STL: Eher nicht // eher doch:
+
+Lambda: Intern realisiert sind
+
+Cpp Insights
 
 =============================
 
@@ -316,4 +322,127 @@ An Hand von Zeitvergleichen lassen sich elementare Funktionalitäten vergleichen:
 == Traversierung eines STL-Containers zur Summenbildung.
 == Kopieren eines Containers.
 
+=====================================
+
+Historische Entwurfsentscheidung bei der STL:
+
+Container   <==>   Iteratoren     <==>   Algorithmen
+
+        std::for_each(
+            values.begin(),
+            values.end(),
+            [](auto& elem) { elem = 123.0; }
+        );
+
+API der Algorithmen ziemlich "transparent" zu halten.
+
+Ausnahme:
+
+for_each: Auch in C++
+
+=====================================
+
+Initialisierung eines STL-Containers mit konstantem Wert.
+
+Using a classic for-loop
+[1]:    Elapsed time: 128 [milliseconds]
+Using an iterator-based for-loop
+[1]:    Elapsed time: 15 [milliseconds]
+Using std::fill
+[1]:    Elapsed time: 19 [milliseconds]
+Using std::fill - using execution policy
+[1]:    Elapsed time: 18 [milliseconds]
+Using std::for_each
+[1]:    Elapsed time: 18 [milliseconds]
+Using range-based for loop // for_each
+[1]:    Elapsed time: 15 [milliseconds]
+Using std::generate
+[1]:    Elapsed time: 21 [milliseconds]
+
+
+
+Warum ist std::fill besser
+
+a) Eine Index-baasierte Loop hat viel MAschinencode
+
+b) std::fill :
+
+A) Kann sehr wohl auf std::memset, std::memcpy, zurückgreifen // abbilden.
+
+oder andere tiefer-liegende Optionen.
+
+
+==================================================================
+
+
+Unterschied std::for_each // std::generate
+
+==================================================================
+
+Frage:
+
+Was ist bei std::memset das Problem:
+
+std::memset
+ C++ Text processing library Null-terminated byte strings 
+Defined in header <cstring>
+void* memset( void* dest, int ch, std::size_t count )
+
+int x;  // soll 4 byte groß sein.
+
+x = 123;
+
+
+memset (&x, 123, 4);  // Fehler // Problem
+
+
+==================================================================
+
+Vorbelegung:
+
+Geht auch mit "  =  { } " gut bei Containern und dem Null-Wert
+
+            std::array<double, 10000> values = { };
+00007FF648389BB0  lea         rax,[rbp+30h]  
+00007FF648389BB4  mov         rdi,rax  
+00007FF648389BB7  xor         eax,eax  
+00007FF648389BB9  mov         ecx,13880h  
+00007FF648389BBE  rep stos    byte ptr [rdi]  
+
+            std::println();
+00007FF648389BC0  call        std::println<0> (07FF64837296Ah)  
+00007FF648389BC5  nop  
+
+
+===============================================================
+
+GCC:
+====
+
+Copying: Using a classic for-loop
+[1]: 	Elapsed time: 11 [milliseconds]
+Copying: Using an iterator-based for-loop
+[1]: 	Elapsed time: 4 [milliseconds]
+Standard Algorithm - std::copy:
+[1]: 	Elapsed time: 1 [milliseconds]
+Using std::copy - using execution policy
+[1]: 	Elapsed time: 1 [milliseconds]
+Using std::memcpy
+[1]: 	Elapsed time: 0 [milliseconds]
+
+Visual C++:
+===========
+
+Copying: Using a classic for-loop
+[1]:    Elapsed time: 375 [milliseconds]
+Copying: Using an iterator-based for-loop
+[1]:    Elapsed time: 426 [milliseconds]
+Standard Algorithm - std::copy:
+[1]:    Elapsed time: 191 [milliseconds]
+Using std::copy - using execution policy
+[1]:    Elapsed time: 193 [milliseconds]
+Using std::memcpy
+[1]:    Elapsed time: 192 [milliseconds]
+
+Zwischenfazit:   Go - for - STL
 

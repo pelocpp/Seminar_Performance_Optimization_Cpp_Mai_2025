@@ -18,7 +18,9 @@
 namespace Algorithms {
 
     //static constexpr int Size = 100'000'000;  // release
-    static constexpr int Size = 10'000'000;     // debug
+    //static constexpr int Size = 50'000'000;     // debug
+
+    static constexpr int Size = 1'000'000;     // debug
 
     // =================================================================================
     // Initialization with a constant value
@@ -30,16 +32,19 @@ namespace Algorithms {
 
         ScopedTimer watch{};
 
-        std::vector<double> values(Size);
+        std::vector<double> values(Size);   // implizites reserve
 
         for (size_t i{}; i != values.size(); ++i) {
-            values[i] = 123.0;
+            values[i] = 123.0;   // operator[] geht nur für einige Container
         }
     }
 
     static auto test_constant_initialize_iterator_based()
     {
         std::println("Using an iterator-based for-loop");
+
+        // Iterator: Beschreibt eine Position
+        // Element:  Muss man den Iterator derefenzieren (operator*)
 
         ScopedTimer watch{};
 
@@ -98,11 +103,14 @@ namespace Algorithms {
 
     static auto test_constant_initialize_range_based_for_loop()
     {
-        std::println("Using range-based for loop");
+        std::println("Using range-based for loop // for_each");
 
         ScopedTimer watch{};
 
         std::vector<double> values(Size);
+
+        // var x;   // C#, JavaScript 
+        //auto n = 123.45;
 
         for (auto& elem : values) {
             elem = 123.0;
@@ -441,9 +449,9 @@ void main_algorithms()
 {
     using namespace Algorithms;
     test_const_initialization();
-    test_initialization();
-    test_sum_calculation();
-    test_copying();
+    //test_initialization();
+    //test_sum_calculation();
+    //test_copying();
 }
 
 // =====================================================================================

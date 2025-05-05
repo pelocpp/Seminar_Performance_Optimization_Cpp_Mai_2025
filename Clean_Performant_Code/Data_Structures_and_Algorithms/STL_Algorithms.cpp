@@ -194,6 +194,14 @@ namespace STLAlgorithms {
             3
         );
 
+        for (auto begin = values.begin(); begin != values.end(); ++begin) {
+
+            if (*begin == 3) {
+                std::println("Found!");
+                break;
+            }
+        }
+
         if (it != values.end()) {
             std::println("Found {} ", *it);
         }

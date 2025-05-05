@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="..\LoggerUtility\Logger.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Topic_Array_Performanz.cpp" />
     <ClCompile Include="Topic_constexpr.cpp" />
     <ClCompile Include="Topic_constexpr_CRC.cpp" />
     <ClCompile Include="Topic_Copy_Move_Elision.cpp" />

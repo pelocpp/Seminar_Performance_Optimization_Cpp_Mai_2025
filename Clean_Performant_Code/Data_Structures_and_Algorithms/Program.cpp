@@ -12,9 +12,9 @@ int main()
 {
     //test_caches();
     //test_stl_container();
-    //test_algorithms();
+    test_algorithms();
     //test_hashing();
-    test_parallel_arrays();
+    //test_parallel_arrays();
 
     return 0;
 }

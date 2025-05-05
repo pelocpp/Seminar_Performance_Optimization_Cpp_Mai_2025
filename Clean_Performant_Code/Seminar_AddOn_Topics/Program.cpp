@@ -8,10 +8,12 @@ extern void main_initializer_list();
 extern void test_initializer_list();
 extern void main_constexpr();
 extern void main_unique_ptr();
+extern void main_algorithms();
+extern  void main_algorithms_array_perf();
 
 int main()
 {
-    main_unique_ptr();
+    main_algorithms_array_perf();
     return 0;
 }
 
