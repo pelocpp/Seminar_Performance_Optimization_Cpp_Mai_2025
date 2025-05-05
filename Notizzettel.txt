@@ -1,0 +1,220 @@
+Performance - Optimierung C++
+=============================
+
+Peter Loos
+
+30+ Jahren
+
+C/C++ , C#, Java, Mobile Programming (Java), Flutter, JavaScript 
+
+// Python
+
+2 Tools:
+
+== Github
+
+https://github.com/pelocpp
+
+== Visual Studio 2022
+
+
+=============================
+
+Ab 12.30 
+
+=============================
+
+Erwartungen:
+
+Was sind meine Erwartungen
+
+Was MUSS drin sein
+
+Eher nicht
+
+C++ Features, die gerade nicht erwähnt wurden
+
+smart_ptr
+
+
+
+=============================
+
+Inhalt:
+
+Tool FramePo
+
+memset , ....
+
+=============================
+
+ToDo - Liste:
+
+std::array, std::span ....      Robustheit // Performanz
+
+auto  (Verlust von const und Referenz, std::uint8_t)
+
+auto: Bei Lambdas geht es nicht anders :)
+
+STL: Eher nicht // eher doch:
+
+=============================
+
+std::string_view
+=================
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/StringView/StringView.md
+
+std::string:          Wo liegen die Zeichen: HEAP
+
+const char* s = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";   NICHT AM HEAP !!!!!!!!!!!
+
+
+std::string_view:  Verwaltet:
+
+i)  Pointer
+ii) Länge
+
+
+std::string_view ist ein NON-OWNING Container: 
+
+Er verwaltet eine Adresse + Länge: Adresse muss gültig sein.
+
+=============================================================
+
+Online Compiler:
+
+Wandbox.org
+
+https://wandbox.org/
+
+=============================================================
+
+std::initializer_list
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/InitializerList/InitializerList.md
+
+Daten:
+
+std::initializer_list:      <=== Stack
+
+std::vector:                <=== Heap
+
+
+Fazit:
+Wenn Daten über einen Methodenaufruf zu transportieren sind
+in einem Vektor, dann geht das mit std::initializer_list schneller !!!
+
+Beachte: Die Daten müssen Kopier-Konstruierbar auf dem Stack sein.  
+
+=============================================================
+
+RAII:
+
+Idee: Resources ===> open // close // es geht um das Vergessen des close
+
+Hüllenobjekte:   // Deterministisch
+
+Konstruktor:  open
+Destruktor:   close  <=== Nicht vergessen 
+
+=============================================================
+
+constexpr
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/ConstExpr/Constexpr.md
+
+
+Wie können wir das einsetzen ????
+
+Anwendungsfälle:
+Programmierung zur Übersetzungszeit.
+
+Erste Anwendung:
+constexpr Lambdas: Ausdrücke im Stile von Makros besser schreiben
+Stichwort: IIFE - Immediately Invoked Functional Expression
+
+Zweite Anwendung:
+Berechnung von Tabellen:  Beispiel CRC-Polynome und deren Koeffizienten.
+
+=========================================================================
+
+Copy/Move Elision
+=================
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/CopyMoveElision/CopyMoveElision.md
+
+Es geht um Zeitersparnis
+
+Es geht um das Vermeiden überflüssiger Kopien
+
+==> Wir können das nicht wirklich direkt selbst programmieren.
+
+Aber wir sollten es kennen !!!
+
+Beispiel: 
+
+Zeile 104 in Datei Topic_Copy_Move_Elision.cpp
+
+i) Rückgabe eines temporären Objekts:
+
+   return Foo(...);
+
+   Copy_Move_Elision  // RVO
+
+
+i) Rückgabe eines benannten Objekts:
+
+   Foo obj (...);
+   return obj;
+
+==> NRVO: Named Return Value Optimization.
+
+Frage:
+
+Foo createData() {
+    Foo data{ 1 };
+    return data;
+}
+
+oder
+
+Foo createData() {
+    Foo data{ 1 };
+    return std::move(data);     // NIEMALS !!!!!!!!!!!!!!!!!!!!!!!!
+}
+
+Why: Der Compiler ist derjenige, der immer den besten / optimalen
+Code erzeugt - wir sollten nicht klüger sein.
+
+=========================================================================
+
+Frage:
+
+Stack versus Heap.
+
+Wo sollten Variablen liegen: Stack oder Heap.
+
+Nicht zu vergessen:  Es gibt auch globale Variablen.
+
+Heap:  Pointer (Raw, Smart) ==> von Methode zu Methode weiterreichen.
+
+Es gibt auch globale Variablen:
+
+Sind im ganzen Programm verfügbar: Pro // Contra.
+
+Sind nur in einer Datei verfügbar: static
+
+(im .obj wird vermerkt, dass diese Variable nur in dieser Datei sichtbar ist)
+
+
+======================================================================
+
+CPU-Cache-Speicher
+
+== Was hat das mit C++ zu tun
+
+== Was hat das mit Performanz zu tun
+
+======================================================================
+
