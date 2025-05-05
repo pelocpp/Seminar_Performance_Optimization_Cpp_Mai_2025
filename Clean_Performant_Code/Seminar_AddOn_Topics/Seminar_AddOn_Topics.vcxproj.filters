@@ -42,5 +42,8 @@
     <ClCompile Include="Topic_Copy_Move_Elision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Topic_STL_Algorithmen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

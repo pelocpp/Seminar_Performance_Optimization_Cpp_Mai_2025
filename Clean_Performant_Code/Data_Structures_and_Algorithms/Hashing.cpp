@@ -37,6 +37,8 @@ namespace std
 
     using namespace DataStructuresAndAlgorithms::Hashing;
 
+    // Template Spezialisierung
+
     template <>
     struct hash<Person>
     {
@@ -90,7 +92,7 @@ namespace DataStructuresAndAlgorithms {
 
         static void test_hashing_01()
         {
-            std::unordered_map<Person, size_t> phoneBook;
+            std::unordered_map<Person, size_t> phoneBook;   // Hash-Tabelle: Key: User-defined
 
             Person sepp = { "Sepp", "Meier", 30 };
             phoneBook[sepp] = 123456;

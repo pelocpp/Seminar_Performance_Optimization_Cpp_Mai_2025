@@ -76,7 +76,8 @@ namespace DataStructuresAndAlgorithms {
 
     namespace CacheMisses {
 
-        constexpr auto capacityL1CacheSize = 32768; // L1 Data Cache Size
+        // constexpr auto capacityL1CacheSize = 32768; // L1 Data Cache Size
+        constexpr auto capacityL1CacheSize = 40'000; // L1 Data Cache Size
 
         constexpr auto Size = capacityL1CacheSize / sizeof(int);
 
@@ -84,7 +85,7 @@ namespace DataStructuresAndAlgorithms {
 
         static MatrixType matrix;
 
-        static auto initMatrix(MatrixType& matrix) {
+        static auto initMatrixFast(MatrixType& matrix) {
 
             ScopedTimer watch{};
 
@@ -92,14 +93,27 @@ namespace DataStructuresAndAlgorithms {
 
             for (size_t i{}; i != Size; ++i) {
                 for (size_t j{}; j != Size; ++j) {
-                    matrix[i][j] = value++;      // no "cache thrashing"
-                    //matrix[j][i] = value++;    // remove comment: demonstrates "cache thrashing"
+                    matrix[i][j] = value++;      // no "cache thrashing" 
+                }
+            }
+        }
+
+        static auto initMatrixSlow(MatrixType& matrix) {
+
+            ScopedTimer watch{};
+
+            size_t value{};
+
+            for (size_t i{}; i != Size; ++i) {
+                for (size_t j{}; j != Size; ++j) {
+                    matrix[j][i] = value++;    //  demonstrates "cache thrashing"
                 }
             }
         }
 
         static void test_cache_thrashing() {
-            initMatrix(matrix);
+            initMatrixFast(matrix);
+            initMatrixSlow(matrix);
         }
     }
 
@@ -344,9 +358,9 @@ namespace DataStructuresAndAlgorithms {
 
 void test_caches()
 {
-    using namespace DataStructuresAndAlgorithms::CacheLinesAndCacheSizes;
-    test_examine_cache_line_size();
-    test_examine_l1_cache_size();
+    //using namespace DataStructuresAndAlgorithms::CacheLinesAndCacheSizes;
+    //test_examine_cache_line_size();
+    //test_examine_l1_cache_size();
 
     using namespace DataStructuresAndAlgorithms::CacheMisses;
     test_cache_thrashing();

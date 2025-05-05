@@ -336,18 +336,18 @@ namespace DataStructuresAndAlgorithms {
 
 void test_parallel_arrays()
 {
-    using namespace DataStructuresAndAlgorithms::UsingParallelArrays;
-    test_parallel_arrays_01();
-    test_parallel_arrays_02();
+    //using namespace DataStructuresAndAlgorithms::UsingParallelArrays;
+    //test_parallel_arrays_01();
+    //test_parallel_arrays_02();
 
-    //using namespace DataStructuresAndAlgorithms::UsingParallelArrays_OriginalUser;
-    //test_parallel_arrays_with_original_users();
+    using namespace DataStructuresAndAlgorithms::UsingParallelArrays_OriginalUser;
+    test_parallel_arrays_with_original_users();
 
-    //using namespace DataStructuresAndAlgorithms::UsingParallelArrays_ImprovedUser;
-    //test_parallel_arrays_with_improved_users();
+    using namespace DataStructuresAndAlgorithms::UsingParallelArrays_ImprovedUser;
+    test_parallel_arrays_with_improved_users();
 
-    //using namespace DataStructuresAndAlgorithms::UsingParallelArrays_ParallelUserData;
-    //test_parallel_arrays_with_parallel_user_data();
+    using namespace DataStructuresAndAlgorithms::UsingParallelArrays_ParallelUserData;
+    test_parallel_arrays_with_parallel_user_data();
 }
 
 // ===========================================================================

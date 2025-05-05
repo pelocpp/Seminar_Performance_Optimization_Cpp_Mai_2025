@@ -36,15 +36,33 @@ C++ Features, die gerade nicht erwähnt wurden
 
 smart_ptr
 
-
-
 =============================
 
 Inhalt:
 
-Tool FramePo
+Tool FramePro
 
 memset , ....
+
+STL: Standard C++ Bibliothek.
+
+Container: 
+
+   std::vector, std::queue,
+
+   Hash-Tabelle: std::map // std::unordered_map
+
+   Key / Value Pairs: Dictionary
+
+STL-Algorithmen:
+
+   Durchlaufen / Traversieren eines Containers.
+   Suchen
+   Vorbelegen
+   Entfernen
+
+   Transformieren
+
 
 =============================
 
@@ -216,5 +234,86 @@ CPU-Cache-Speicher
 
 == Was hat das mit Performanz zu tun
 
+Matrix:
+
+[1]:    Elapsed time: ca. 167 [milliseconds]
+
+[1]:    Elapsed time: >= 700 [milliseconds]
+
+versus
+
+
+
 ======================================================================
+
+Parallel Arrays: Beipiel
+
+
+struct User
+{
+    std::string m_name;
+    std::string m_username;
+    std::string m_password;
+    std::string m_securityQuestion;
+    std::string m_securityAnswer;
+    short       m_level{};
+    bool        m_isPlaying{};
+};
+
+struct Users
+{
+    struct User
+    {
+        std::string m_name;
+        std::string m_username;
+        std::string m_password;
+        std::string m_securityQuestion;
+        std::string m_securityAnswer;
+    } m_users[1000];
+
+    short       m_level[1000];
+    bool        m_isPlaying[1000];
+}
+
+
+Aus dem Buch Andrist / Sehr: Parallele Arrays ab Seite ca. 120.
+
+================================================================
+
+STL Container:
+
+std::unorderer_map:
+
+
+Telefonbuch:  "Mueller" => 345345
+
+std::unordered_map<std::string, size_t>
+
+class User
+{
+};
+
+std::unordered_map<User, size_t>
+
+ERROR at Compile Time.   => Hash-Funktion fehlt.
+
+===================================================
+
+Überblick STL Algorithmen:
+
+Es werden einfache STL-Algorithmen vorgestellt:
+
+std::fill
+std::for_each
+std::generate
+std::accumulate
+std::copy
+
+An Hand von Zeitvergleichen lassen sich elementare Funktionalitäten vergleichen:
+
+== Initialisierung eines STL-Containers mit konstantem Wert.
+== Initialisierung eines STL-Containers mit variienden Werten.
+== Traversierung eines STL-Containers zur Summenbildung.
+== Kopieren eines Containers.
+
 

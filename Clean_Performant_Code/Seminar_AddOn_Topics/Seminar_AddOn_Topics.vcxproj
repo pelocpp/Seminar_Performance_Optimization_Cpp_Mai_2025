@@ -137,6 +137,7 @@
     <ClCompile Include="Topic_InitializerList.cpp" />
     <ClCompile Include="Topic_InitializerList_Vergleich.cpp" />
     <ClCompile Include="Topic_SSO.cpp" />
+    <ClCompile Include="Topic_STL_Algorithmen.cpp" />
     <ClCompile Include="Topic_StringView.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
