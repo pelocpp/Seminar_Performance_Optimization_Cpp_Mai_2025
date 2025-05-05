@@ -51,7 +51,7 @@ namespace STLAlgorithms {
         std::generate(
             values.begin(),
             values.end(),
-            [n = 0]() mutable { ++n;  return 2 * n; }
+            [n = 0] () mutable { ++n;  return 2 * n; }
         );
 
         std::for_each(
@@ -193,14 +193,6 @@ namespace STLAlgorithms {
             values.end(),
             3
         );
-
-        for (auto begin = values.begin(); begin != values.end(); ++begin) {
-
-            if (*begin == 3) {
-                std::println("Found!");
-                break;
-            }
-        }
 
         if (it != values.end()) {
             std::println("Found {} ", *it);
