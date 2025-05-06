@@ -156,7 +156,7 @@ Dieser wird sukzessive bei entsprechenden `push_back`-Aufrufen reserviert.
 Hier wird sehr viel unnütze Rechenzeit verbraucht, wenn man die &ndash; gerne auch ungefähre &ndash; 
 Kapazität des `std::vector`-Objekts vorab weiß.
 
-Mit der `reserve`-Methode lässt sich die *Kapazität* (benötigter Speicherplatz) des  
+Mit der `reserve`-Methode lässt sich die *Kapazität* (benötigter Speicherplatz) des
 `std::vector`-Objekts vorab reservieren.
 
 Das folgende Code-Snippet stellt eine Vergleich mit und ohne Aufruf

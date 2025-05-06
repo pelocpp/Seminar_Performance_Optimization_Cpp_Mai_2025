@@ -636,3 +636,28 @@ Ein std::span ist vergleichbar mit std::string_view.
 
 =====================================
 
+Micro-Benchmarking:  Kleinere Code-Sequenzen.
+
+=====================================
+
+Placement New:
+
+Es geht um den HEAP.
+
+Beispiel:  
+
+std::string* sp = new std::string("ABC");
+
+i)  Es wird Speicher reserviert auf dem Heap (40 Bytes).
+
+ii) Dieser Speicherbereich wird initialisiert / vorbelegt: Durch den Konstruktor.
+
+C++:   Man kann i) und ii) trennen / separat gestalten.
+
+
+new            ===> Vorbelegung ist bei Objekten dabei.
+
+std::malloc()  ===> Keine Vorbelegung!
+
+
+

@@ -350,7 +350,7 @@ namespace MemoryManagement {
             size_t      m_age;
 
         public:
-            Person(std::string first, std::string last, size_t age)
+            Person(const std::string& first, const std::string& last, size_t age)
                 : m_first{ first }, m_last{ last }, m_age{ age }
             {
                 std::println("c'tor Person");
@@ -361,9 +361,12 @@ namespace MemoryManagement {
             }
         };
 
-        unsigned char g_memory[sizeof (Person)];
+        static unsigned char g_memory[sizeof (Person)];   // 88 Bytes
 
         static void test_placement_new_01() {
+
+            // int* ip = new int[10];
+            // std::string* sp = new std::string[10];
 
             std::println("sizeof (Person): {}", sizeof(Person));
 
@@ -375,6 +378,7 @@ namespace MemoryManagement {
         static void test_placement_new_02() {
 
             auto* memory = std::malloc(sizeof(Person));
+
             auto* person = ::new (memory) Person{ "Sepp", "Mueller", static_cast<size_t>(30) };
 
             person->~Person();
@@ -856,7 +860,7 @@ void memory_management()
 
     using namespace MemoryManagement;
 
-    Stack_Debug_Versus_Release_Mode::test_stack_debug_versus_release_mode();
+    //Stack_Debug_Versus_Release_Mode::test_stack_debug_versus_release_mode();
 
     //Stack_Behaviour::test_examine_stack_behaviour();
     ////Stack_Size::test_examine_stack_size();               // crashes (intentionally)
@@ -877,7 +881,7 @@ void memory_management()
     //Placement_New::test_placement_new_01();
     //Placement_New::test_placement_new_02();
     //Placement_New::test_placement_new_03();
-    //Placement_New::test_placement_new_04();
+    Placement_New::test_placement_new_04();
 
     //Placement_New_Example::test_placement_new_example_00();
     //Placement_New_Example::test_placement_new_example_01();
