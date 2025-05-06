@@ -78,7 +78,7 @@ auto: Bei Lambdas geht es nicht anders :)
 
 STL: Eher nicht // eher doch:
 
-Lambda: Intern realisiert sind
+Lambda: Intern realisiert sind  // mutable
 
 Cpp Insights
 
@@ -445,4 +445,194 @@ Using std::memcpy
 [1]:    Elapsed time: 192 [milliseconds]
 
 Zwischenfazit:   Go - for - STL
+
+================================================
+
+auto:
+
+Wo tritt es in Erscheinung:
+
+A) Deklaration von Variablen:
+
+      auto n = 123;
+
+      Type Deduction // Typableitung
+
+B) Deklaration von Parametern:
+
+   [](auto i) {
+       std::print("{} ", i);
+   }
+
+  Generische Lambdas // generische Funktion:
+
+  Pro:     Optimaler Maschinencode wird erzeugt
+   
+           Für int, für double, ....
+
+  Contra:  Sollte Typableitung gut kennen.
+
+C) Als Rückgabetyp von freien Funktionen / Methoden
+
+  ====================================================
+
+  Peformanz:
+
+    void test_func1(int n)
+    {
+        int m = n;
+    }
+
+        int m = n;
+00007FF72EE4C6FF  mov         eax,dword ptr [n]  
+00007FF72EE4C705  mov         dword ptr [m],eax  
+
+    void test_func2(int& n)
+    {
+        int m = n;
+    }
+
+        int m = n;
+00007FF72EE4C740  mov         rax,qword ptr [n]  
+00007FF72EE4C747  mov         eax,dword ptr [rax]  
+00007FF72EE4C749  mov         dword ptr [m],eax  
+
+
+// =====================================================
+
+Frage:
+
+Es macht keinen Unterschied, ob Referenz oder Pointer ????
+
+A) Objekt liegt am STACK:  Go for Referenz (Pointer ginge // very C-Stylistic)
+
+void tue_was()
+{
+    std::string s;
+}
+
+B) Objekt liegt am HEAP:   Go for Pointer (geht gar nicht anders)
+
+// ================================================================
+
+
+auto values = std::vector<int>(10);
+
+std::iota(
+    values.begin(),
+    values.end(),
+    1
+);
+
+std::for_each(
+    values.begin(),
+    values.end(),
+    [](auto i) { std::print("{} ", i); }
+);
+
+STL:  Stilistik:
+
+Programmieren in "Building Blocks"
+
+====================================================
+
+Transformieren:  Umwandeln
+
+STL:   2 Container:
+
+Wollen die Daten des ersten Containers in einem zweiten Container "anders", also mit einem anderen Datentyp
+aufbereiten.
+
+ABER:
+
+Quell- und Ziel-Container müssen gleich gross sein.
+
+====================================================
+
+Grundlagen für STL-Algorithmen:
+-------------------------------
+
+auto
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/Auto/Auto.md
+
+
+Lambda
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/Lambda/Lambda.md
+
+Generischer Lambda:
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/GenericFunctions/GenericFunctions.md
+
+====================================================
+
+Warum sind Lambdas wichtig:
+
+Sie können "inline" umgesetzt werden.
+
+Was ist ein Lambda:
+
+Lambda-Funktion  falsch:  Lambda: Objekt
+
+Aufrufbares Objekt // Callable Object
+
+====================================================
+
+Cpp Insights:
+
+https://cppinsights.io/
+
+KEIN Online - Compiler:
+
+Converter: C++ ==> C++
+
+           Original ==> C++: Wie siegt es die Sprache "intern"
+
+// ==========================================================
+
+std::array   STL
+
+C-Style Array
+
+Performanz:  Kein Gewinn.
+
+Robustheit !!!
+
+std::array
+std::vector
+C-Style Array
+std::span
+
+C-Array: Keine Überprüfung der Korrektheit der Indices.
+
+   Debug-Modus: Doch. // Release-Modus: Nein.
+
+CTAD - Class Template Argument Deduction
+
+Robustheit ===> 'at' als Zugriff wirft eine Ausnahme.
+
+  Für Performanz: operator[] wirft keine Ausnahme.
+
+=====================================
+
+    static void printArray(const int* array, size_t size) {
+
+Für die beiden Werte int* array und size_t size
+gibt es eine Hüllen:
+
+std::span   Spanne: Von einer Anfangsadresse bis hin zu einer
+                    bestimmten Länge
+
+template<typename T>
+class span {
+    T*   m_data;
+    size_t m_count;
+public:
+    ...
+};
+
+Ein std::span ist vergleichbar mit std::string_view.
+
+=====================================
 

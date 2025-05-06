@@ -2,7 +2,6 @@
 // Exercises_11_Initialization.cpp
 // =====================================================================================
 
-
 #include "../LoggerUtility/ScopedTimer.h"
 
 #include <algorithm>

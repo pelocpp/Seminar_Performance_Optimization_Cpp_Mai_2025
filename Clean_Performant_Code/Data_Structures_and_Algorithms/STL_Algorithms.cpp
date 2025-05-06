@@ -30,14 +30,88 @@ namespace STLAlgorithms {
 
     // -----------------------------------------------------------------------
 
+    // Intention von C++ // Referenz
+    void tue_noch_was(const std::string& par)
+    {
+        auto size = par.size();
+        // par[0] = '!';
+    }
+
+    void tue_was()
+    {
+        std::string s;   // STACK
+
+        tue_noch_was(s);
+    }
+
+    void tue_noch_was_2(const std::string* par)
+    {
+        auto size = par->size();
+        // par[0] = '!';
+    }
+
+    // Pointer: Classic (Raw) / Smart Ptr
+    void tue_was_2()
+    {
+        std::string* s = new std::string("ABC");  // HEAP
+
+        tue_noch_was_2(s);
+    }
+
+    // -----------------------------------------------------------------------
+
+
+    void test_func1(int n)
+    {
+        int m = n;
+    }
+
+    void test_func2(const int& n)
+    {
+        int m = n;
+    }
+
+    void test_func3(const std::string& n)
+    {
+        auto& m = n;
+    }
+
+
+    static void test_ref_or_no_ref()
+    {
+        int x = 123;
+
+        test_func1(x);
+        test_func2(x);
+    }
+
+    // ============================================================
+
     static void test_iterating()
     {
-        const auto values = std::vector{ 9, 7, 1, 2, 3, 8, 10, 4, 5, 6 };
+        auto values = std::vector<int>{ 9, 7, 1, 2, 3, 8, 10, 4, 5, 6 };
+
+        auto values2 = std::vector{ 9.0, 7.0, 1.0, 2.0, 3.0, 8.0 };
+
+        using namespace std::string_literals;
+        auto values3 = std::vector<std::string>{ "9.0"s, "7.0"s };
+
+        // Achtung: Generischer Lambda
 
         std::for_each(
             values.begin(),
             values.end(), 
-            [](auto i) { std::print("{} ", i); }
+            [](auto i) { 
+                std::print("{} ", i);
+            }
+        );
+
+        std::for_each(
+            values2.begin(),
+            values2.end(),
+            [](auto i) {
+                std::print("{} ", i);
+            }
         );
         std::println();
     }
@@ -84,21 +158,35 @@ namespace STLAlgorithms {
 
     // -----------------------------------------------------------------------
 
+    void print2(int i) {
+        std::print("{} ", i);
+    }
+
     static void test_copying()
     {
         std::vector<int> source(10, 123);
-        std::vector<int> target(10);
+        // std::vector<int> target(10);
+        std::vector<int> target(20);
+
+        // Könnte / Wird schneller sein als eine for-Schleife
+        // memcpy wird vermutlich verwendet,
+        // wenn der/die Container konsektiven Speicher haben.
+
+        // ACHTUNG:
+        // Wie schreibt std::copy einen Wert in target: operator=
+        // Alternativ: mit push_back
 
         std::copy(
             source.begin(),
             source.end(),
-            target.begin()
+            target.begin()  // Muss target mindestens so gross wie source sein ....
+            //std::back_inserter (target) // Wenn target leer ist ...
         );
 
         std::for_each(
             target.begin(),
             target.end(),
-            [](auto i) { std::print("{} ", i); }
+            [] (auto i) { std::print("{} ", i); }
         );
         std::println();
     }
@@ -661,6 +749,7 @@ static void test_algorithms_introduction()
     using namespace STLAlgorithms;
     test_initializing();
     test_iterating();
+    test_ref_or_no_ref();
     test_generating();
     test_generating_indices();
     test_copying();

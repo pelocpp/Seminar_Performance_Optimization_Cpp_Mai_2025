@@ -132,12 +132,17 @@
     <ClCompile Include="..\LoggerUtility\Logger.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Topic_Array_Performanz.cpp" />
+    <ClCompile Include="Topic_auto.cpp" />
     <ClCompile Include="Topic_constexpr.cpp" />
     <ClCompile Include="Topic_constexpr_CRC.cpp" />
     <ClCompile Include="Topic_Copy_Move_Elision.cpp" />
+    <ClCompile Include="Topic_Generic_Functions.cpp" />
     <ClCompile Include="Topic_InitializerList.cpp" />
     <ClCompile Include="Topic_InitializerList_Vergleich.cpp" />
+    <ClCompile Include="Topic_Lambdas.cpp" />
+    <ClCompile Include="Topic_NeueStilistik_Initialisierung.cpp" />
     <ClCompile Include="Topic_SSO.cpp" />
+    <ClCompile Include="Topic_std_array.cpp" />
     <ClCompile Include="Topic_STL_Algorithmen.cpp" />
     <ClCompile Include="Topic_StringView.cpp" />
   </ItemGroup>
