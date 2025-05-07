@@ -13,7 +13,6 @@
 #include <print>
 #include <map>
 
-
 namespace Auto_Examples {
 
     // ----------------------------------------------------------------------

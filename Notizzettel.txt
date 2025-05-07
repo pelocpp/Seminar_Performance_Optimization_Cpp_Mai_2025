@@ -3,6 +3,10 @@ Performance - Optimierung C++
 
 Peter Loos
 
+peter.loos@gmx.de
+
+=============================
+
 30+ Jahren
 
 C/C++ , C#, Java, Mobile Programming (Java), Flutter, JavaScript 
@@ -866,3 +870,30 @@ An einem Beispiel mit 10 Operanden:
 00007FF644F7D408  add         eax,dword ptr [<params_8>]  
 00007FF644F7D40E  add         eax,dword ptr [<params_9>]  
 00007FF644F7D414  mov         dword ptr [result],eax  
+
+
+==================================================================
+
+Profiling:
+
+Ein Beispiel:
+
+splitPebble:
+
+Description:
+
+Es wird ein Wert ganzzahliug übergeben, der eine GERADE Anzahl von Digits enthält:
+
+42  => 4 und 2
+
+2024 => 20 und 24
+
+13459825 => 1345 und 9825
+
+=====================================================================
+
+Structured Binding
+
+Bei auto kann man den Werten Namen geben
+
+=====================================================================

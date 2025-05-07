@@ -256,24 +256,24 @@ public:
             if (pebble == 0) {
                 *pos = 1;
             }
-            else if (hasEvenDigits(pebble)) {
+            //else if (hasEvenDigits(pebble)) {
 
-                const auto [leftHalf, rightHalf] = splitPebble(pebble);
-                *pos = leftHalf;
-                m_pebbles.insert_after(pos, rightHalf);
-                m_size++;
-
-                ++pos; // skip new right half
-            }
-            //else if (auto result = hasEvenDigitsEx(pebble); result.first) {
-
-            //    const auto [leftHalf, rightHalf] = splitPebbleEx(pebble, result.second);  // <== splitPebbleEx or splitPebbleExEx
+            //    const auto [leftHalf, rightHalf] = splitPebble(pebble);
             //    *pos = leftHalf;
             //    m_pebbles.insert_after(pos, rightHalf);
             //    m_size++;
 
             //    ++pos; // skip new right half
             //}
+            else if (const auto& [hasEven, numDigits] = hasEvenDigitsEx(pebble); /*result.first*/  hasEven ) {   // C++ 17 Feature
+
+                const auto [leftHalf, rightHalf] = splitPebbleExEx(pebble, numDigits);  // <== splitPebbleEx or splitPebbleExEx
+                *pos = leftHalf;
+                m_pebbles.insert_after(pos, rightHalf);
+                m_size++;
+
+                ++pos; // skip new right half
+            }
             else {
                 *pos *= 2024;
             }

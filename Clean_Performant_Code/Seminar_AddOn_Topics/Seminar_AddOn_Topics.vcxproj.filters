@@ -75,5 +75,8 @@
     <ClCompile Include="Topic_Folding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Topic_Variant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
