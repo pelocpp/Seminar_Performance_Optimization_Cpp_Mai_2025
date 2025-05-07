@@ -356,6 +356,27 @@ namespace MemoryManagement {
                 std::println("c'tor Person");
             }
 
+            Person(const Person& other)
+                : m_first{ other.m_first }, m_last{ other.m_last }, m_age{ other.m_age }
+            {
+                std::println("copy c'tor Person");
+            }
+
+            Person(Person&& other) noexcept
+                : m_first{ std::move(other.m_first) }, m_last{ std::move(other.m_last) }, m_age{ std::move(other.m_age) }
+            {
+                std::println("move c'tor Person");
+            }
+
+            Person& operator= (Person&& other) noexcept
+            {
+                m_first = std::move(other.m_first);
+                m_last = std::move(other.m_last);
+                m_age = std::move(other.m_age);     // Der Lesbarkeit halber // elementare
+                // identisch mit
+                m_age = other.m_age;
+            }
+
             ~Person() {
                 std::println("d'tor Person");
             }
@@ -433,6 +454,8 @@ namespace MemoryManagement {
             {
                 //std::println("Person");
             }
+
+            // Rule-of-ZERO !!!!!!
 
             //Person(const Person& other)
             //    : m_first{ other.m_first }, m_last{ other.m_last }, m_age{ other.m_age }

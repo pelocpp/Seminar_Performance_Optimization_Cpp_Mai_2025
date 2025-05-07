@@ -140,11 +140,14 @@
     <ClCompile Include="Topic_InitializerList.cpp" />
     <ClCompile Include="Topic_InitializerList_Vergleich.cpp" />
     <ClCompile Include="Topic_Lambdas.cpp" />
+    <ClCompile Include="Topic_MoveSemantics.cpp" />
     <ClCompile Include="Topic_NeueStilistik_Initialisierung.cpp" />
+    <ClCompile Include="Topic_RValue.cpp" />
     <ClCompile Include="Topic_SSO.cpp" />
     <ClCompile Include="Topic_std_array.cpp" />
     <ClCompile Include="Topic_STL_Algorithmen.cpp" />
     <ClCompile Include="Topic_StringView.cpp" />
+    <ClCompile Include="Topic_VariadicTemplates.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

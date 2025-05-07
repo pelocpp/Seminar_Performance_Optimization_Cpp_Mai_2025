@@ -14,10 +14,13 @@ extern void main_auto();
 extern void main_lambdas();
 extern void main_generic_functions();
 extern void main_array();
+extern void main_rvalue_lvalue();
+extern void main_move_semantics();
+extern void main_variadic_templates_introduction();
 
 int main()
 {
-    main_array();
+    main_move_semantics();
     return 0;
 }
 

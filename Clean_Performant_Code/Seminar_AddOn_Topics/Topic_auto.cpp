@@ -93,16 +93,16 @@ namespace Auto_Examples {
         }
     }
 
-    template <typename T, typename U>
-    static auto anotherFoo(bool flag, T f, U d) -> decltype( f + d)
-    {
-        if (flag) {
-            return f;
-        }
-        else {
-            return d;
-        }
-    }
+    //template <typename T, typename U>
+    //static auto anotherFoo(bool flag, T f, U d) -> decltype( f + d)
+    //{
+    //    if (flag) {
+    //        return f;
+    //    }
+    //    else {
+    //        return d;
+    //    }
+    //}
 
     template <typename T, typename U>
     static  decltype (  std::declval<T>() + std::declval<U>() )
@@ -116,11 +116,11 @@ namespace Auto_Examples {
         }
     }
 
-    void test_anotherFooZwei() {
+    //void test_anotherFooZwei() {
 
-        auto result = anotherFoo(false, 123.0f, 123);
+    //    auto result = anotherFoo(false, 123.0f, 123);
 
-    }
+    //}
 
 
 

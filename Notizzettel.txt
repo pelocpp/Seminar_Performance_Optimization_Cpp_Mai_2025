@@ -659,5 +659,180 @@ new            ===> Vorbelegung ist bei Objekten dabei.
 
 std::malloc()  ===> Keine Vorbelegung!
 
+// ==========================================================
 
+Performanz:
+
+C++ 11 // kleiner // darüber:
+
+Kleiner: Kritik:
+
+C++ hat per Definition
+
+== Referenz-Semantik (&, dynamisch)
+== Value-Semantik (Stack) ===> KOPIE
+
+STL // Container:  std::vector: VALUE   std::vector <Person> 
+
+C++: Person p;   // <==== STACK
+
+C#: std::vector<Person>
+
+C#:  Person p = new Person();   <=== HEAP
+
+Schwäche von C++: Zu viele Kopien.
+
+C++ 11: Move-Semantik.
+
+== RValue
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/RValueLValue/RValueLValue.md
+
+============================================================
+
+== MoveSemantik
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/MoveSemantics/MoveSemantics.md
+
+
+Beispiel:
+
+... 060:    wird freigegeben
+... 140:    ist im Container
+
+Kritisiert !!!!
+
+... 530:
+
+===========================================
+
+Zentralen Objekte:   Singleton-Charakter:  ==> Kein Move, kein Copy
+
+Real-Life: Move und Copy:  Move == Performant ==> zwei Move-Methoden unterstützen.
+
+
+===========================================
+
+Raw-Pointer:
+
+== Gegen natürlich
+
+   Raw-Pointer kann KOPIERT werden => WER GIBT FREI ??? Wer ist der Owner / Besitzer ???
+
+== std::unique_ptr:  
+
+   Kann NICHT kopiert werden.  // std::move GEHT
+   Ist sperriger im Handlung
+   Nur EINEN Owner
+   ABER 100% GARANTIE. free // delete kommt.
+
+===========================================
+
+Neue Klasse:
+
+A) Brauche ich einen Destruktor ???????????
+ 
+   Wann ??? Wenn new verwendet wird. // delete
+
+   Hinweis:
+
+B) Kopier-Konstruktor:   // Wertzuweisungs-Operator
+
+   Hmmmm, wenn das Objekt NICHT kopiert wird, dann brauche ich ihn nicht.
+
+
+ABER:
+
+    private:
+
+        Singleton(const Singleton&) = delete;
+        Singleton(Singleton&&) noexcept = delete;
+        Singleton& operator=(const Singleton&) = delete;
+        Singleton& operator=(Singleton&&) noexcept = delete;
+   
+
+
+
+
+class NEU
+{
+    int* m_ptr;
+
+    // m_ptr = new .....
+
+    void release() {
+       delete m_ptr;
+       m_ptr = NULL;
+    }
+
+    ~NEU () {
+
+        if (m_ptr != NULL) delete m_ptr;
+
+        // Oder kürzer
+
+        delete m_ptr;
+    }
+}
+
+
+
+
+class NEU
+{
+    std::string m_s;
+}
+
+=====================================================
+
+Low-Level Routinen:
+
+            std::malloc
+            std::construct_at
+
+            std::destroy_at
+            std::free
+
+an Stelle von 
+
+new
+
+delete
+
+Yes, die Low-Level-Routinen verwendet man eher selten.
+
+Wo bieten sie sich an .......
+
+================================================================
+
+"Folding"
+
+Grundlage: Variadische Templates.
+
+Why ???????????????????????????????????????????
+
+Das Weiterreichen // Transportieren von bel. vielen Daten
+unterschiedlichen Typs von A nach B  ( von einer Funktion zu einer zweiten Funktion )
+Typsicher
+
+Wo tritt das in der STL in Erscheinung:
+
+Viele make_XXX Funktionen:
+
+make_tuple
+make_unique
+make_shared
+make ...
+
+Threading:
+
+Thread-Prozedur: Parameter:  BELIEBIG
+
+std::unique_ptr:
+
+=============================================================================
+
+Die emplace-Technik:
+
+Eine weitere, alternative (zur Move-Semantik) Technik, um KOPIEN zu vermeiden
 
