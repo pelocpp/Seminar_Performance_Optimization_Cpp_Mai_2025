@@ -18,10 +18,11 @@ extern void main_rvalue_lvalue();
 extern void main_move_semantics();
 extern void main_variadic_templates_introduction();
 extern void main_folding();
+extern void main_variant();
 
 int main()
 {
-    main_folding();
+    main_variant();
     return 0;
 }
 

@@ -5,6 +5,8 @@ Peter Loos
 
 peter.loos@gmx.de
 
+
+
 =============================
 
 30+ Jahren
@@ -897,3 +899,90 @@ Structured Binding
 Bei auto kann man den Werten Namen geben
 
 =====================================================================
+
+std::variant
+============
+
+Programming ==> Hat interessante Feature 
+
+Ein Variant kann Daten unterschiedlichen Typs aufnehmen ...
+zu EINEM Zeitpunkt aber nur EIN Datum.
+
+a) union : Ähnlich.
+
+b) Excel // Google Sheets Anwendung: Zelle / Cell:
+
+Cell: Zeichenketten, numerische Werte, Datum, Currency, ...
+
+<type_traits> Bibliothek
+
+Metaprogramming:  Programmierung zur Übersetzungzeit.
+
+            if ( std::is_same<ElemTypeWithOutRefAndConst,int>::value == true ) {
+00007FF76D6D6756  xor         eax,eax      // EAX  Akku auf 0 setzen
+00007FF76D6D6758  cmp         eax,1  
+00007FF76D6D675B  je          `VariantDemo::test_04'::`2'::<lambda_1>::operator()<int>+7Ah (07FF76D6D67AAh)  
+
+=======================================================================
+
+Container:
+
+STL Container:   std::vector<int>   ==> Nur int-Werte drin.
+
+Homogener Container.
+
+Heterogener Container: C++  ????
+
+Jou, ginge mit std::variant.
+
+=======================================================================
+
+Statischer vs. dynamischer Polymorphismus:
+------------------------------------------
+
+virtual: 
+
+Kritik: Tabelle (vtable)  .. indirekter Methodenaufruf.
+
+Performanz:     Ohne Virtual
+
+Gegenüberstellung:
+
+Beispiel:
+
+Buchhandlung:
+
+  Buch
+  CDs
+  DVDs
+  BlueRay
+  Magazin
+  Zeitschrift
+
+
+
+Statischer Polymorphismus:
+
+Ist ein Zusammenspiel aus
+
+== Heterogener Container:   std::vector<std::variant < ... >>
+
+== std::variant
+   C++ 17
+
+== std::visit
+   C++  17
+
+== Generischen Lambda, der die Datentypen des std::variant unterstützt
+   C++  20
+
+   Aber : Aufrufbares Objekt ( operator() )
+
+== Kann die Methodenaufrufe statisch binden 
+
+== Überlegung für performante Hierarchien von Objekten (ohne Vererbung zu verwenden)
+
+== Typabsicherung (gemeinsame Methoden wie getPrice) mit concept / requires
+   (C++ 20)
+
+========================================================

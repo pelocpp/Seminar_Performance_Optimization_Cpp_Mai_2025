@@ -124,9 +124,33 @@ namespace VariantDemo {
         std::variant<int, double, std::string> v{ 123 };
 
         // using a generic visitor (matching all types in the variant)
-        auto visitor = [](const auto& elem) {
-            std::println("{}", elem);
-            };
+        auto visitor = []( const auto& elem ) {
+
+            using ElemType = decltype (elem);
+            using ElemTypeWithOutRef = std::remove_reference<ElemType>::type;
+            using ElemTypeWithOutRefAndConst = std::remove_const<ElemTypeWithOutRef>::type;
+
+            std::println("Start");
+
+            if constexpr ( std::is_same<ElemTypeWithOutRefAndConst,int>::value == true ) 
+            {
+                std::println("Integer: {}", elem);
+            }
+            else if constexpr ( std::is_same<ElemTypeWithOutRefAndConst, double>::value == true )
+            {
+                std::println("Double: {}", elem);
+            }
+            else if constexpr ( std::is_same<ElemTypeWithOutRefAndConst, std::string>::value == true )
+            {
+                std::println("std::string: {}", elem);
+                auto len = elem.size();
+                std::println("Size: {}", len);
+            }
+            else
+            {
+                std::println("UNBEKANNT: {}", elem);
+            }
+        };
 
         std::visit(visitor, v);
 
@@ -347,17 +371,17 @@ void main_variant()
 {
     using namespace VariantDemo;
 
-    test_01();
-    test_02();
-    test_03();
+    //test_01();
+    //test_02();
+    //test_03();
     test_04();
-    test_05();
-    test_06();
+    //test_05();
+    //test_06();
     test_07();
-    test_08();
-    test_09();
-    test_10();
-    test_11();
+    //test_08();
+    //test_09();
+    //test_10();
+    //test_11();
 }
 
 // =====================================================================================
