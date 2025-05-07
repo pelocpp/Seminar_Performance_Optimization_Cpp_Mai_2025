@@ -136,6 +136,7 @@
     <ClCompile Include="Topic_constexpr.cpp" />
     <ClCompile Include="Topic_constexpr_CRC.cpp" />
     <ClCompile Include="Topic_Copy_Move_Elision.cpp" />
+    <ClCompile Include="Topic_Folding.cpp" />
     <ClCompile Include="Topic_Generic_Functions.cpp" />
     <ClCompile Include="Topic_InitializerList.cpp" />
     <ClCompile Include="Topic_InitializerList_Vergleich.cpp" />

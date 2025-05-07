@@ -15,7 +15,9 @@ public:
     }
 
     ~ScopedTimer() {
-        Logger::stopWatchMilli(std::cout);
+        //  Logger::stopWatchMilli(std::cout);
+        //Logger::stopWatchMicro(std::cout);
+        Logger::stopWatchNano(std::cout);
     }
 
     // no copying or moving

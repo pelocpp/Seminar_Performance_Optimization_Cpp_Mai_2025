@@ -17,10 +17,11 @@ extern void main_array();
 extern void main_rvalue_lvalue();
 extern void main_move_semantics();
 extern void main_variadic_templates_introduction();
+extern void main_folding();
 
 int main()
 {
-    main_move_semantics();
+    main_folding();
     return 0;
 }
 

@@ -54,23 +54,35 @@ namespace VariadicTemplatesIntro_01 {
         return os;
     }
 
-    template <typename T>
-    void printer(T n) {
+    //template <typename T>
+    //void printer(T n) {
+
+    //    std::println("{}", n);
+    //}
+
+    //template <typename T, typename ... TArgs>    // Parameter Pack // einpacken von Datentypen
+    //void printer(T n, TArgs ... args) {          // Plural // Parameter Pack // einpacken von Werten
+
+    //    std::println("{}", n);
+    //    printer<TArgs ...>(args ... );           // auspacken
+    //}
+
+    // C++ 20:
+
+    void printer(auto n) {
 
         std::println("{}", n);
     }
 
-    template <typename T, typename ... TArgs> // Parameter Pack // einpacken von Datentypen
-    
-    void printer(T n, TArgs ... args) {          // Plural // Parameter Pack // einpacken von Werten
+    void printer(auto n, auto ... args) {          // Plural // Parameter Pack // einpacken von Werten
 
         std::println("{}", n);
-        printer<TArgs ...>(args ... );           // auspacken
+        printer (args ...);           // auspacken
     }
 
     void test_variadic_seminar_01() {
 
-        printer<int, int, int, int, int>( 1, 2, 3, 4, 5 );
+        printer( 1, 2, 3, 4, 5 );
     }
 
     template <typename T, typename ... TArgs>

@@ -114,7 +114,7 @@ https://wandbox.org/
 
 =============================================================
 
-std::initializer_list
+std::initializer_list:
 
 https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/InitializerList/InitializerList.md
 
@@ -836,3 +836,33 @@ Die emplace-Technik:
 
 Eine weitere, alternative (zur Move-Semantik) Technik, um KOPIEN zu vermeiden
 
+=============================================================================
+
+Folding:
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/Folding/Folding.md
+
+Performanz
+
+Operatoren:  +, *, << 
+
+Ausdrücke:   auto result = (((a + b) + c) + d) + e + f;
+
+Mit einem Operator.
+
+An einem Beispiel mit 10 Operanden:
+
+           result = ( ... + params );
+00007FF644F7D3D4  mov         eax,dword ptr [<params_1>]  
+00007FF644F7D3DA  mov         ecx,dword ptr [<params_0>]  
+00007FF644F7D3E0  add         ecx,eax  
+00007FF644F7D3E2  mov         eax,ecx  
+00007FF644F7D3E4  add         eax,dword ptr [<params_2>]  
+00007FF644F7D3EA  add         eax,dword ptr [<params_3>]  
+00007FF644F7D3F0  add         eax,dword ptr [<params_4>]  
+00007FF644F7D3F6  add         eax,dword ptr [<params_5>]  
+00007FF644F7D3FC  add         eax,dword ptr [<params_6>]  
+00007FF644F7D402  add         eax,dword ptr [<params_7>]  
+00007FF644F7D408  add         eax,dword ptr [<params_8>]  
+00007FF644F7D40E  add         eax,dword ptr [<params_9>]  
+00007FF644F7D414  mov         dword ptr [result],eax  
